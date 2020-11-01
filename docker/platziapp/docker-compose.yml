@@ -1,0 +1,33 @@
+# Idica que debería soportar docker compose para construir la aplicacion
+version: "3.8"
+
+# Aca se habla de servicios y no de contenedores
+# Son parte de la totalidad de la aplicacion
+# Un servicio puede contener mas de un contenedor
+services:
+  app:
+    # Contruir una imagen a partir de un contexto (Es donde esta parado el docker compose)
+    # Docker es inteligente y si encuentra un docker file va utilizar eso
+    build: .
+    environment:
+      # Agregando la variable de entorno al contenedor
+      MONGO_URL: "mongodb://db:27017/test"
+    # Dependencias del servicio de otro servicio
+    # Garantiza que el servicio este cargado pero no controla el tiempo de inicio de su dependencia
+    depends_on:
+      - db
+    ports:
+      # - "3000:3000"
+      # Indicando que utilice cualquiera de los puertos del rango indicado
+      - "3000-3010:3000"
+    # Lista de descripciones de como queremos que utilicen los volumenes
+    volumes:
+      # Bind Mount
+      # path_hos:dentro_contenedor
+      # Esto pisa o sobrescribe todo el contenido en su totalidad que se encuentre en /usr/src
+      - .:/usr/src
+      # Indicando que parte no queremos que la sobrescriba
+      - /usr/src/node_modules
+
+  db:
+    image: mongo
