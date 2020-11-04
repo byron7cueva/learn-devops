@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: contmagic
+    env: staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: contmagic
+      env: staging
+  template:
+    metadata:
+      labels:
+        app: contmagic
+        env: staging
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80

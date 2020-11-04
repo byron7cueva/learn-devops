@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: webserver
+spec:
+  # Numero de las replicas
+  replicas: 1
+  # Un selector busca una etiqueta en algunos de los recursos y a ese se lo aplica
+  # Este es un selector de etiquetas
+  selector:
+    app: nginx
+  # En el template se define como van ha ser los Pods
+  template:
+    # Metadatos
+    metadata:
+      name: nginx
+      # Añadiendo una etiqueta al pod
+      # De esta forma el replication controller va saber a quien debe aplicar el escalado a traves del selector
+      labels:
+        app: nginx
+    spec:
+      # El contenido que va dentro del template va ser igual como el spec del kind Pod
+      containers:
+      - name: nginx
+        image: nginx

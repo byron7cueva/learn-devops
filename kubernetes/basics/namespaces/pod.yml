@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: webserver
+    # Indicando el nombre donde queremos deplegar
+    namespace: webserver
+spec:
+    containers:
+    - name: webserver
+      image: nginx

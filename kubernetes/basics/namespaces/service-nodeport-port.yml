@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: servicio
+    namespace: webserver
+spec:
+    # Este servicio va enviar cualquier trafico al Pod que tenga la etiqueta nginx
+    selector:
+        app: nginx
+    ports:
+        - protocol: TCP
+          port: 80
+          # Indicandole un puerto fijo para que no se lo asigne de forma aleatoria
+          # Este debe estar en el rando de 30000 - 32767
+          nodePort: 30000
+    # Tipo de servicio
+    type: NodePort

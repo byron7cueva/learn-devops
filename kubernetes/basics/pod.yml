@@ -1,0 +1,13 @@
+# Version del API
+apiVersion: v1
+# Tipo
+kind: Pod
+metadata:
+    # Nombre
+    name: webserver
+# Especificacion
+spec:
+    # Lista de contenedores
+    containers:
+    - name: webserver
+      image: nginx
